@@ -334,7 +334,7 @@
     @media (max-width: 768px) {
       .qrcode-fixed {
         right: 20px;
-        bottom: 80px;
+        bottom: 90px;
       }
     }
 
@@ -1021,7 +1021,7 @@
     function checkQrVisibility() {
       const rect = contactSection.getBoundingClientRect();
       // Show fixed QR when contact section is in viewport
-      if (rect.top <= window.innerHeight * 0.7 && rect.bottom >= 0) {
+      if (rect.top <= window.innerHeight * 0.7 && rect.bottom >= 0.6 ) {
         fixedQr.classList.add('visible');
       } else {
         fixedQr.classList.remove('visible');
