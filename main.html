@@ -14,6 +14,7 @@
       --accent: #1abc9c;
       --dark: #0f2e24;
       --darker: #0b1e17;
+      --darkest: #061a13; /* New darker shade */
       --light: #ffffff;
       --gray: #cccccc;
       --dark-gray: #1e2f2b;
@@ -130,11 +131,19 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 5%;
-      background: rgba(0, 0, 0, 0.3);
+      background: var(--darkest); /* Darkened background */
       position: fixed;
       width: 100%;
       z-index: 1000;
-      backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(46, 204, 113, 0.2); /* Added subtle border */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+      transition: background 0.3s ease; /* Smooth transition */
+    }
+
+    /* Scrolled header effect */
+    header.scrolled {
+      background: var(--darkest);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .logo {
@@ -253,6 +262,7 @@
     .contact-info-container {
       background: rgba(15, 46, 36, 0.5);
       padding: 50px 0;
+      position: relative;
     }
 
     .contact-info-grid {
@@ -280,6 +290,52 @@
 
     .address {
       line-height: 1.7;
+    }
+
+    /* ===== QR CODE FIXED STYLES ===== */
+    .qrcode-overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: white;
+      padding: 6px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Fixed QR code when scrolling */
+    .qrcode-fixed {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: white;
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 100;
+      transition: all 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    
+    .qrcode-fixed.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Mobile QR code position */
+    @media (max-width: 768px) {
+      .qrcode-fixed {
+        right: 20px;
+        bottom: 80px;
+      }
     }
 
     /* ===== PROJECTS SECTION ===== */
@@ -313,19 +369,6 @@
 
     .project-image:hover {
       transform: scale(1.02);
-    }
-
-    .qrcode-overlay {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: white;
-      padding: 6px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     /* ===== FORM STYLES ===== */
@@ -787,6 +830,13 @@
     </nav>
   </header>
 
+  <!-- Fixed QR code for contact section -->
+  <div class="qrcode-fixed" id="fixedQr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://line.me/ti/p/~@nctpros" 
+         alt="LINE QR Code" class="qr-small">
+    <small>Scan LINE</small>
+  </div>
+
   <main>
     <section class="hero" id="home">
       <div class="container">
@@ -959,6 +1009,36 @@
   </div>
 
   <script>
+    // ===== HEADER SCROLL EFFECT =====
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // ===== QR CODE FIXED EFFECT =====
+    const contactSection = document.getElementById('contact-info');
+    const fixedQr = document.getElementById('fixedQr');
+    
+    function checkQrVisibility() {
+      const rect = contactSection.getBoundingClientRect();
+      // Show fixed QR when contact section is in viewport
+      if (rect.top <= window.innerHeight * 0.7 && rect.bottom >= 0) {
+        fixedQr.classList.add('visible');
+      } else {
+        fixedQr.classList.remove('visible');
+      }
+    }
+    
+    window.addEventListener('scroll', checkQrVisibility);
+    window.addEventListener('resize', checkQrVisibility);
+    
+    // Initial check
+    checkQrVisibility();
+
     // ===== CHATBOT FUNCTIONALITY =====
     const chatPopup = document.getElementById('chatPopup');
     const chatMessages = document.getElementById('chatMessages');
