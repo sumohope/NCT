@@ -687,10 +687,26 @@
 
     /* ===== RESPONSIVE STYLES ===== */
     @media (max-width: 768px) {
+      /* ปรับ header ไม่ให้ fixed บนมือถือ */
       header {
-        padding: 15px 5%;
+        position: static !important;
+        padding: 15px 5% !important;
         flex-direction: column;
         gap: 15px;
+        width: 100% !important;
+        box-shadow: none;
+        border-bottom: none;
+      }
+      
+      /* ปรับ padding ของ hero section */
+      .hero {
+        padding: 60px 5% 60px !important;
+      }
+      
+      /* ปรับ scrolled class ไม่ให้มีผลบนมือถือ */
+      header.scrolled {
+        background: var(--darkest) !important;
+        box-shadow: none !important;
       }
 
       nav {
@@ -700,10 +716,6 @@
 
       nav a {
         margin: 5px 10px;
-      }
-
-      .hero {
-        padding: 180px 5% 80px;
       }
 
       .cta-buttons {
@@ -743,7 +755,7 @@
       }
       
       .hero {
-        padding: 150px 5% 60px;
+        padding: 60px 5% 40px !important;
       }
       
       .form-container {
@@ -1020,14 +1032,25 @@
   </div>
 
   <script>
-    window.addEventListener('scroll', function() {
+    // ปรับปรุงฟังก์ชัน scroll ให้ทำงานเฉพาะบนเดสก์ท็อปเท่านั้น
+    function updateHeader() {
       const header = document.querySelector('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+      // ตรวจสอบว่าอยู่บนเดสก์ท็อป (กว้างกว่า 768px)
+      if (window.innerWidth > 768) {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
       } else {
+        // บนมือถือ: ลบ class scrolled
         header.classList.remove('scrolled');
       }
-    });
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    window.addEventListener('resize', updateHeader);
+    updateHeader(); // เรียกฟังก์ชันครั้งแรกเมื่อโหลดหน้า
 
     const contactSection = document.getElementById('contact-info');
     const fixedQr = document.getElementById('fixedQr');
