@@ -14,7 +14,7 @@
       --accent: #1abc9c;
       --dark: #0f2e24;
       --darker: #0b1e17;
-      --darkest: #061a13; /* New darker shade */
+      --darkest: #061a13;
       --light: #ffffff;
       --gray: #cccccc;
       --dark-gray: #1e2f2b;
@@ -131,16 +131,15 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 5%;
-      background: var(--darkest); /* Darkened background */
+      background: var(--darkest);
       position: fixed;
       width: 100%;
       z-index: 1000;
-      border-bottom: 1px solid rgba(46, 204, 113, 0.2); /* Added subtle border */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
-      transition: background 0.3s ease; /* Smooth transition */
+      border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s ease;
     }
 
-    /* Scrolled header effect */
     header.scrolled {
       background: var(--darkest);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -165,7 +164,7 @@
     .logo-text {
       font-size: 1.8rem;
       font-weight: 700;
-	  align-items: center;
+      align-items: center;
       background: linear-gradient(to right, var(--primary), var(--accent));
       -webkit-background-clip: text;
       background-clip: text;
@@ -288,7 +287,32 @@
       color: var(--accent);
       min-width: 20px;
     }
+.contact-info-message {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
 
+.contact-info-message h4 {
+  color: #2c3e50;
+  margin-top: 0;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.contact-info-message p {
+  margin: 0.5rem 0;
+  color: #34495e;
+}
+
+.contact-info-message i {
+  width: 20px;
+  color: #3498db;
+  margin-right: 10px;
+}
     .address {
       line-height: 1.7;
     }
@@ -308,7 +332,6 @@
       z-index: 10;
     }
 
-    /* Fixed QR code when scrolling */
     .qrcode-fixed {
       position: fixed;
       bottom: 115px;
@@ -330,12 +353,6 @@
       transform: translateY(0);
       opacity: 1;
     }
-
-    @media (max-width: 768px) {
-  .qrcode-fixed {
-    display: none !important;
-  }
-}
 
     /* ===== PROJECTS SECTION ===== */
     .projects {
@@ -703,6 +720,21 @@
         right: 5%;
         bottom: 80px;
       }
+      
+      /* Hide QR code on mobile */
+      .qrcode-fixed {
+        display: none !important;
+      }
+      
+      /* Center company name on mobile */
+      .logo {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-text {
+        margin-top: 8px;
+      }
     }
     
     @media (max-width: 480px) {
@@ -724,14 +756,12 @@
     }
 
     /* ==== NEW STYLES FOR CHANGES ==== */
-    /* Make QR code 5 times smaller */
     .qr-small {
       width: 100px;
       height: 100px;
       margin-top: 8px;
     }
 
-    /* Map styling */
     .map-image {
       width: 100%;
       height: 150px;
@@ -741,7 +771,6 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Standardize cards */
     .service-card {
       cursor: default;
       text-decoration: none;
@@ -761,7 +790,6 @@
     }
     
     /* ==== NEW ADDITIONS ==== */
-    /* Clickable card styles */
     .clickable-card {
       cursor: pointer;
       position: relative;
@@ -782,7 +810,6 @@
       z-index: 1;
     }
     
-    /* Solar monitoring image */
     .solar-monitor {
       width: 100%;
       border-radius: 10px;
@@ -792,7 +819,6 @@
       border: 1px solid rgba(255,255,255,0.2);
     }
     
-    /* AI CCTV image */
     .ai-cctv {
       width: 100%;
       border-radius: 10px;
@@ -802,7 +828,6 @@
       border: 1px solid rgba(255,255,255,0.2);
     }
     
-    /* Solution badge */
     .solution-badge {
       background: linear-gradient(45deg, var(--accent), var(--primary));
       color: white;
@@ -829,7 +854,6 @@
     </nav>
   </header>
 
-  <!-- Fixed QR code for contact section -->
   <div class="qrcode-fixed" id="fixedQr">
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://line.me/ti/p/~@nctpros" 
          alt="LINE QR Code" class="qr-small">
@@ -854,7 +878,6 @@
           <h2>Our Solution and Services</h2>
         </div>
         <div class="services-grid">
-          <!-- Smart City Solutions with hidden link -->
           <div class="service-card clickable-card" onclick="window.open('https://bestsmartpole.com/dashboard', '_blank')">
             <div class="card">
               <i class="fas fa-city card-icon"></i>
@@ -864,7 +887,6 @@
             </div>
           </div>
 
-          <!-- Smart Traffic Management with hidden link -->
           <div class="service-card clickable-card" onclick="window.open('https://bestsmartpole.com/impact-arena', '_blank')">
             <div class="card">
               <i class="fas fa-traffic-light card-icon"></i>
@@ -874,7 +896,6 @@
             </div>
           </div>
 
-          <!-- New: AI CCTV and Smart Mobile Application Solution -->
           <div class="service-card">
             <div class="card">
               <i class="fas fa-video card-icon"></i>
@@ -883,7 +904,6 @@
             </div>
           </div>
 
-          <!-- AI Automation -->
           <div class="service-card">
             <div class="card">
               <i class="fas fa-robot card-icon"></i>
@@ -892,7 +912,6 @@
             </div>
           </div>
 
-          <!-- Data Analytics -->
           <div class="service-card">
             <div class="card">
               <i class="fas fa-chart-line card-icon"></i>
@@ -901,7 +920,6 @@
             </div>
           </div>
 
-          <!-- New: ESG Mobile Solar & Power Monitoring -->
           <div class="service-card">
             <div class="card">
               <i class="fas fa-solar-panel card-icon"></i>
@@ -983,7 +1001,6 @@
     </div>
   </footer>
 
-  <!-- Chatbot UI -->
   <div class="chatbot-button" id="chatbotButton" aria-label="Open chatbot">
     <i class="fas fa-comment-dots"></i>
   </div>
@@ -1003,7 +1020,6 @@
   </div>
 
   <script>
-    // ===== HEADER SCROLL EFFECT =====
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
       if (window.scrollY > 50) {
@@ -1013,13 +1029,11 @@
       }
     });
 
-    // ===== QR CODE FIXED EFFECT =====
     const contactSection = document.getElementById('contact-info');
     const fixedQr = document.getElementById('fixedQr');
     
     function checkQrVisibility() {
       const rect = contactSection.getBoundingClientRect();
-      // Show fixed QR when contact section is in viewport
       if (rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0.9 ) {
         fixedQr.classList.add('visible');
       } else {
@@ -1029,11 +1043,8 @@
     
     window.addEventListener('scroll', checkQrVisibility);
     window.addEventListener('resize', checkQrVisibility);
-    
-    // Initial check
     checkQrVisibility();
 
-    // ===== CHATBOT FUNCTIONALITY =====
     const chatPopup = document.getElementById('chatPopup');
     const chatMessages = document.getElementById('chatMessages');
     const userInput = document.getElementById('userInput');
@@ -1106,7 +1117,6 @@
       const typingIndicator = showTypingIndicator();
       
       try {
-        // Simulate API response delay
         await new Promise(resolve => setTimeout(resolve, 1500));
         
         let reply;
@@ -1137,14 +1147,12 @@
       }
     }
 
-    // ===== EVENT LISTENERS =====
     chatbotButton.addEventListener('click', toggleChat);
     sendMessageBtn.addEventListener('click', sendMessage);
     userInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') sendMessage();
     });
 
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1161,9 +1169,8 @@
       });
     });
 
-    // Initialize chatbot
     document.addEventListener('DOMContentLoaded', () => {
-      // Any initialization code
+      // Initialization code
     });
   </script>
 </body>
